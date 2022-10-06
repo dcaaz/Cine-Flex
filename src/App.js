@@ -1,30 +1,35 @@
 import React from "react";
 import styled from "styled-components";
 import GlobalStyle from "./GlobalStyle";
-import Posters from "./Posters";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import PostersPage from "./PostersPage";
+import SessionPage from "./SessionPage";
+import SeatsPage from "./SeatsPage";
 
 export default function App() {
 
     return (
-        <All>
-            <GlobalStyle />
-            <Header>
-                <h1>CINEFLEX</h1>
-            </Header>
-            <Choice>
-                <h1>Selecione o filme</h1>
-            </Choice>
-            <Main>
-                <Posters />
-            </Main>
-            {/* <Footer>
-            </Footer> */}
-        </All>
+        <BrowserRouter>
+            <All>
+                <GlobalStyle />
+                <Header>
+                    <h1>CINEFLEX</h1>
+                </Header>
+                <Routes>
+                    <Route path="/" element={<PostersPage />}>
+                    </Route>
+                    <Route path="/sessoes/:idFilme" element={<SessionPage />}>
+                    </Route>
+                    <Route path="/assentos/:idSessao" element={<SeatsPage />}>
+                    </Route>
+                </Routes>
+            </All>
+        </BrowserRouter>
     )
 }
 
 const All = styled.div`
-    background-color: #E8833A;
+    background-color: #F4E8FF;
     width: 375px;
     min-height: 100vh;
     align-items: center;
@@ -44,22 +49,4 @@ const Header = styled.div`
         font-weight: 400;
         line-height: 40px;
     }
-`
-
-const Choice = styled.div`
-    height: 110px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    h1{
-        font-style: normal;
-        font-weight: 400;
-        font-size: 24px;
-        line-height: 28px;
-        color: #293845;
-    }
-`
-const Main = styled.div`
-    display: flex;
-    flex-wrap: wrap
 `
