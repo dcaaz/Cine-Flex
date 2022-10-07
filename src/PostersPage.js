@@ -8,7 +8,7 @@ export default function PostersPage() {
     const [image, setImage] = useState([]);
 
     useEffect(() => {
-        const url = "https://mock-api.driven.com.br/api/v5/cineflex/movies";
+        const url = "https://mock-api.driven.com.br/api/v8/cineflex/movies";
         const promise = axios.get(url);
 
         promise.then((resp) => {
@@ -36,7 +36,7 @@ export default function PostersPage() {
             <Main>
                 {image.map((img) =>
                     <Poster key={img.id}>
-                        <Link to="/sessoes/:idFilme">
+                        <Link to={`/sessoes/${img.id}`}>
                             <img src={img.posterURL} alt="Capa do Filme" />
                         </Link>
                     </Poster>

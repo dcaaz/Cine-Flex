@@ -1,6 +1,6 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+//import axios from "axios";
+//import React, { useEffect, useState } from "react";
+//import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Inputs from "./SeatsInput";
 
@@ -68,7 +68,7 @@ const Seats = styled.div`
             margin-left: 24px;
             margin-right: 24px;
             button {
-                width: 26px;
+            width: 26px;
             height: 26px;
             margin-left: 8px;
             margin-bottom: 18px;
@@ -89,6 +89,15 @@ const Instructions = styled.div`
             display: flex;
             align-items: center;
             justify-content: center;
+             & button:first-child {
+            background-color: orange;
+            }
+            & button:nth-child(2) {
+            background-color: #FF922E;
+            }
+            & button:last-child {
+            background-color: #2FBE34;
+            }
 `
 
 const Info = styled.div` 
@@ -96,7 +105,7 @@ const Info = styled.div`
         flex-direction: column;
         align-items: center;
         button {
-                width: 26px;
+            width: 26px;
             height: 26px;
             margin: 0px 40px;
             margin-top: 16px;
@@ -112,13 +121,4 @@ const Info = styled.div`
             align-items: center;
             margin: 0px 25px;
     }
-            /* & button:first-child {
-            background-color: orange;
-            }
-            & button:nth-child(2) {
-            background-color: #FF922E;
-            }
-            & button:last-child {
-            background-color: #2FBE34;
-            } */
 `

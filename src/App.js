@@ -18,7 +18,7 @@ export default function App() {
                 <Routes>
                     <Route path="/" element={<PostersPage />}>
                     </Route>
-                    <Route path="/sessoes/:idFilme" element={<SessionPage />}>
+                    <Route path="/sessoes/:idFilme" element={<SessionPage />}> {/*dois pontos indica que a variável alterará */}
                     </Route>
                     <Route path="/assentos/:idSessao" element={<SeatsPage />}>
                     </Route>
@@ -29,9 +29,8 @@ export default function App() {
 }
 
 const All = styled.div`
-    background-color: #F4E8FF;
     width: 375px;
-    min-height: 100vh;
+    height: 100vh;
     align-items: center;
 `
 

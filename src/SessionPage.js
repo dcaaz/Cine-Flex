@@ -2,40 +2,51 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
-import CapaFilme from "./Imagens/CapaFilme.png";
 
 export default function SessionPage() {
-    // const [filme, setFilme] = useState({};
-    // const {idFilme} = useParams();
-    // console.log(idFilme);
+    const [filme, setFilme] = useState({});
+    const [days, setDays] = useState([]);
+    const { idFilme } = useParams();
+    console.log(idFilme);
 
-    // useEffect(() => {
-    //     const promise = axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/movies/ID_DO_FILME/showtimes`);
-    // })
+    useEffect(() => {
+        const promise = axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/movies/${idFilme}/showtimes`);
+
+        promise.then((resp) => {
+            let filme = resp.data;
+            setFilme(filme);
+            setDays([...filme.days]);
+
+            console.log("acerto", filme);
+        })
+
+        promise.catch((err) => {
+            console.log("erro", err.response.data);
+        })
+    }, []);
+
 
     return (
         <>
             <Choice>
                 <h1>Selecione o horário</h1>
             </Choice>
-            <DayOfTheWeek>
-                <h1>Quinta-Feira  - 24/06/2021</h1>
-                <Buttons>
-                    <Link to="/assentos/:idSessao"><button>15:00</button></Link>
-                    <Link to="/assentos/:idSessao"><button>19:00</button></Link>
-                </Buttons>
-            </DayOfTheWeek>
+            {days.map((d) =>
+                <DayOfTheWeek key={d.id}>
+                    <h1>{d.weekday} - {d.date}</h1>
 
-            <DayOfTheWeek>
-                <h1>Quinta-Feira  - 24/06/2021</h1>
-                <Buttons>
-                    <Link to="/assentos/:idSessao"><button>15:00</button></Link>
-                    <Link to="/assentos/:idSessao"><button>19:00</button></Link>
-                </Buttons>
-            </DayOfTheWeek>
+                    <Buttons >
+                        {d.showtimes.map((s, i) =>
+
+                            <Link key={i} to="/assentos/:idSessao"><button>{s.name}</button></Link>
+                        )}
+                    </Buttons>
+
+                </DayOfTheWeek>
+            )}
             <Footer>
-                <img src={CapaFilme} alt="Capa do Filme" />
-                <h1>Nome do filme</h1>
+                <img src={filme.posterURL} alt="Capa do Filme" />
+                <h1>{filme.title}</h1>
             </Footer>
         </>
     )
@@ -66,6 +77,7 @@ const DayOfTheWeek = styled.div`
 
 const Buttons = styled.div`
     display: flex;
+    flex-wrap: nowrap;  
     button {
         background-color: #E8833A;
         color: #FFFFFF;
@@ -83,8 +95,8 @@ const Footer = styled.div`
     height: 117px;
     background-color: #DFE6ED;
     display: flex;
-    align-items: center;
     position: fixed;
+    align-items: center;
     bottom: 0px;
     img{
         width: 48px;
