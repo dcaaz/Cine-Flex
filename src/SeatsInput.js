@@ -1,34 +1,68 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-export default function Inputs() {
+export default function Inputs( {selectedSeats} ) {
+
+    const [name, setName] = useState("");
+    const [cpf, setCpf] = useState("");
+    const navigate = useNavigate();
+
+    function reserve(event){
+        event.preventDefault();
+
+        const URL="https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many";
+
+        const body = {
+            ids: selectedSeats,
+            name: name,
+            cpf: cpf,
+        }
+
+        const promise = axios.post(URL, body);
+        promise.then(() => {
+            navigate(`/sucess/${body}`);
+        })
+
+        promise.catch((err) => {
+            console.log("erro", err.response.data.mensagem);
+            alert(err.response.data.mensagem);
+        })
+    }
 
     return (
         <>
-            <AllInputs>
-                <Input>
-                    <h1>Nome do Comprador:</h1>
-                    <input
-                        placeholder="Digite seu nome..."
-                    // onChange={(event) => setInput(event.target.value)}
-                    // value={input}
-                    />
-                </Input>
+            <form onSubmit={reserve}>
+                <AllInputs>
+                    <Input>
+                        <label htmlFor="name">Nome do Comprador:</label>
+                        <input 
+                            id="name"
+                            placeholder="   Digite seu nome..."
+                            onChange={(e) => setName(e.target.value)}
+                            value={name}
+                            required
+                        />
+                    </Input>
 
-                <Input>
-                    <h1>CPF do Comprador:</h1>
-                    <input
-                        placeholder="Digite seu CPF..."
-                    // onChange={(event) => setInput(event.target.value)}
-                    // value={input}
-                    />
-                </Input>
-            </AllInputs>
-            <Reserve>
-                <Link to="/sucess/:idSucess">
-                    <button><h1>Reservar assento(s)</h1></button>
-                </Link>
-            </Reserve>
+                    <Input>
+                        <label htmlFor="cpf">CPF do Comprador:</label>
+                        <input
+                            id="cpf"
+                            placeholder="   Digite seu CPF..."
+                            onChange={(e) => setCpf(e.target.value)}
+                            value={cpf}
+                            required
+                        />
+                    </Input>
+                </AllInputs>
+                <Reserve>
+                        <button type="submit">
+                            <h1>Reservar assento(s)</h1>
+                        </button>
+                </Reserve>
+            </form>
         </>
     )
 }
@@ -45,12 +79,17 @@ const Input = styled.div`
     display: flex;
     flex-direction: column;
     margin-bottom: 7px;
+    label {
+        font-style: Regular;
+        font-size: 18px;
+        line-height: 21px;
+    }
     input {
-      width: 327px;
-      height: 51px;  
-      border-radius: 3px;
-      border-color: #D4D4D4;
-      border-style: solid;
+        width: 327px;
+        height: 51px;  
+        border-radius: 3px;
+        border-color: #D4D4D4;
+        border-style: solid;
     }
     input::placeholder{
         font-style: italic;
@@ -63,6 +102,7 @@ const Reserve = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 30px;
     button{
         width: 225px;
         height: 42px;
@@ -70,5 +110,13 @@ const Reserve = styled.div`
         border-style: solid;
         border-color:#E8833A;
         background-color: #E8833A;
+    }
+    h1 {
+        font-style: regular;
+        font-size: 18px;
+        line-height: 21px;
+        line-height: 100%;
+        font-weight: 400;
+        color: #FFFFFF;
     }
 `

@@ -10,6 +10,7 @@ export default function SeatsPage() {
     const [place, setPlace] = useState({});
     const [seats, setSeats] = useState([]);
     const [selectedSeats, setSelectedSeats] = useState([]);
+    const [footer, setFooter] = useState([]);
 
     useEffect(() => {
         const promise = axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${idSessao}/seats`);
@@ -17,9 +18,9 @@ export default function SeatsPage() {
         promise.then((resp) => {
             let respData = resp.data;
 
-            console.log("resposta da promise", respData);
             setPlace(respData);
             setSeats(respData.seats);
+            setFooter(respData.movie);
         })
 
         promise.catch((err) => {
@@ -30,14 +31,20 @@ export default function SeatsPage() {
     function clickedSeat(seat, i) {
         let newSeat = seat;
         let newSeats = seats;
+        console.log("seat", seat);
 
         newSeat.selected = !seat.selected;
         newSeats[i] = newSeat;
 
         setSeats([...newSeats]);
 
-        let newSelectedSeats = newSeats.filter((seat) => seat.selected).map((seat) => seat.name);
+        let newSelectedSeats = newSeats.filter((seat) => seat.selected).map((seat) => seat.id);
         setSelectedSeats(newSelectedSeats);
+        console.log("assentos", newSelectedSeats);
+    }
+
+    if (place.length === 0) {
+        return <Carregando>CARREGANDO...</Carregando>
     }
 
     return (
@@ -74,7 +81,15 @@ export default function SeatsPage() {
                 </Info>
             </Instructions>
 
-            <Inputs />
+            <Inputs  selectedSeats={selectedSeats}/>
+
+            <Footer>
+                <img src={footer.posterURL} alt="Capa do Filme" />
+                <h1>{footer.title}</h1>
+
+                {/* <img src={place.movie.posterURL} alt="Capa do Filme" />
+                <h1>{place.movie.title}</h1> */}
+            </Footer>
         </>
     )
 }
@@ -166,4 +181,32 @@ const Button2 = styled(Button1)`
 
 const Button3 = styled(Button1)`
     background-color: #FBE192;
+`
+
+const Footer = styled.div`
+    width: 375px;
+    height: 117px;
+    background-color: #DFE6ED;
+    display: flex;
+    align-items: center;
+    bottom: 0px;
+    img{
+        width: 48px;
+        height: 72px;
+        margin-left: 18px;
+        border: 1px solid #FFFFFF;
+        box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.1);
+    }
+    h1{
+        font-style: regular;
+        font-size: 26px;
+        line-height: 30p;
+        line-height: 100%;
+        margin-left: 14px;
+    }
+`
+
+const Carregando = styled.div`
+    font-size: 20px;
+    margin: 10px;
 `
