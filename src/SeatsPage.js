@@ -10,6 +10,7 @@ export default function SeatsPage() {
     const [place, setPlace] = useState({});
     const [seats, setSeats] = useState([]);
     const [selectedSeats, setSelectedSeats] = useState([]);
+    const [selectedSeatsIds, setSelectedSeatsIds] = useState([]);
     const [footer, setFooter] = useState([]);
 
     useEffect(() => {
@@ -38,9 +39,14 @@ export default function SeatsPage() {
 
         setSeats([...newSeats]);
 
-        let newSelectedSeats = newSeats.filter((seat) => seat.selected).map((seat) => seat.id);
-        setSelectedSeats(newSelectedSeats);
-        console.log("assentos", newSelectedSeats);
+        let newSelectedSeats = newSeats.filter((seat) => seat.selected);
+
+        setSelectedSeats(newSelectedSeats.map((seat) => seat.name));
+        setSelectedSeatsIds(newSelectedSeats.map((seat) => seat.id));
+
+        console.log(newSelectedSeats.map((seat) => seat.name));
+        console.log(newSelectedSeats.map((seat) => seat.id));
+
     }
 
     if (place.length === 0) {
@@ -52,43 +58,46 @@ export default function SeatsPage() {
             <Choice>
                 <h1>Selecione o(s) assento(s)</h1>
             </Choice>
-            <Seats>
-                {seats.map((seat, i) => <Seat
-                key={i} 
-                back={seat.isAvailable ? seat.selected ? '#1AAE9E' : '#C3CFD9' : '#FBE192'} 
-                border={seat.isAvailable ? seat.selected ? '#0E7D71' : '#808F9D' : '#F7C52B'}>
-                    <button
+            <Seats data-identifier="seat">
+                {seats.map((seat, i) =>
+                    <Seat
                         key={i}
-                        onClick={seat.isAvailable ? () => clickedSeat(seat, i) : null}
-                    >
-                        <h1>{seat.name}</h1>
-                    </button>
-                </Seat>
+                        back={seat.isAvailable ? seat.selected ? '#1AAE9E' : '#C3CFD9' : '#FBE192'}
+                        border={seat.isAvailable ? seat.selected ? '#0E7D71' : '#808F9D' : '#F7C52B'}>
+                        <button
+                            key={i}
+                            onClick={seat.isAvailable ? () => clickedSeat(seat, i) : null}
+                        >
+                            <h1>{seat.name}</h1>
+                        </button>
+                    </Seat>
                 )}
             </Seats>
             <Instructions>
-                <Info>
+                <Info data-identifier="seat-selected-subtitle">
                     <Button1></Button1>
                     <h1>Selecionado</h1>
                 </Info>
-                <Info>
+                <Info data-identifier="seat-available-subtitle">
                     <Button2></Button2>
                     <h1>Disponível</h1>
                 </Info>
-                <Info>
+                <Info data-identifier="seat-unavailable-subtitle">
                     <Button3></Button3>
                     <h1>Indisponível</h1>
                 </Info>
             </Instructions>
 
-            <Inputs  selectedSeats={selectedSeats}/>
+            <Inputs 
+                
+                selectedSeats={selectedSeats}
+                selectedSeatsIds={selectedSeatsIds}
+                movie={footer.title}
+                hour={place} />
 
             <Footer>
                 <img src={footer.posterURL} alt="Capa do Filme" />
                 <h1>{footer.title}</h1>
-
-                {/* <img src={place.movie.posterURL} alt="Capa do Filme" />
-                <h1>{place.movie.title}</h1> */}
             </Footer>
         </>
     )
@@ -129,7 +138,6 @@ const Seats = styled.div`
             border-style: solid;
     }
             h1{
-            font-style: regular;
             font-size: 11px;
             line-height: 13px;
             align-items: center;
@@ -156,7 +164,6 @@ const Info = styled.div`
         flex-direction: column;
         align-items: center;
             h1 {
-            font-style: regular;
             font-size: 13px;
             line-height: 15px;
             align-items: center;
@@ -198,7 +205,6 @@ const Footer = styled.div`
         box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.1);
     }
     h1{
-        font-style: regular;
         font-size: 26px;
         line-height: 30p;
         line-height: 100%;

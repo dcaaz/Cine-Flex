@@ -1,33 +1,46 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
 
 export default function SucessPage() {
+    const location = useLocation();
+    console.log("location", location);
+
     return (
         <>
             <Choice>
                 <h1>Pedido feito com sucesso!</h1>
             </Choice>
+
             <Confirm>
+
                 <Top>
                     <h1>FIlme e sessão</h1>
                 </Top>
-                <h1>{body.name}</h1>
-                <h1>Data e hora</h1>
-            </Confirm>
-            <Confirm>
+                <Dice>
+                    <h1>{location.state.movie}</h1>
+                    <h1>{location.state.hour.day.date} {location.state.hour.name}</h1>
+                </Dice>
+
                 <Top>
-                    <h1>Ingresso</h1>
+                    <h1>Ingressos</h1>
                 </Top>
-                <h1>Assento</h1>
-                <h1>Assento</h1>
-            </Confirm>
-            <Confirm>
+                <Dice>
+                    {location.state.number.map((i, indice) =>
+                        <h1 key={indice}>
+                            Assento {i}
+                        </h1>)}
+                </Dice>
+
                 <Top>
                     <h1>Comprador</h1>
                 </Top>
-                <h1>Nome:</h1>
-                <h1>Cpf:</h1>
+                <Dice>
+                    <h1>Nome: {location.state.name}</h1>
+                    <h1>Cpf: {location.state.cpf}</h1>
+                </Dice>
+
             </Confirm>
+
             <Home>
                 <Link to="/">
                     <button>
@@ -58,16 +71,8 @@ const Choice = styled.div`
 const Confirm = styled.div`
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
-    h1 {
-        font-size: 22px;
-        line-height: 26px;
-        line-height: 100%;
-        font-weight: 400;
-        color: #293845;
-    }
+    margin-bottom: 62px;
+    margin-left: 69px;
 `
 
 const Top = styled.div`
@@ -76,6 +81,17 @@ const Top = styled.div`
         line-height: 28px;
         line-height: 100%;
         font-weight: 700;
+        margin-top: 16px;
+`
+
+const Dice = styled.div`
+        h1 {
+            font-size: 22px;
+            line-height: 26px;
+            line-height: 100%;
+            font-weight: 400;
+            color: #293845;
+        }
 `
 
 const Home = styled.div`

@@ -31,10 +31,10 @@ export default function SessionPage() {
                 <h1>Selecione o horário</h1>
             </Choice>
             {days.map((d) =>
-                <DayOfTheWeek key={d.id}>
+                <DayOfTheWeek key={d.id} data-identifier="session-date">
                     <h1>{d.weekday} - {d.date}</h1>
 
-                    <Buttons >
+                    <Buttons data-identifier="hour-minute-btn">
                         {d.showtimes.map((hour, i) =>
 
                             <Link key={i} to={`/assentos/${hour.id}`}><button>{hour.name}</button></Link>
@@ -44,8 +44,8 @@ export default function SessionPage() {
                 </DayOfTheWeek>
             )}
             <Footer>
-                <img src={filme.posterURL} alt="Capa do Filme" />
-                <h1>{filme.title}</h1>
+                <img src={filme.posterURL} alt="Capa do Filme" data-identifier="movie-img-preview" />
+                <h1 data-identifier="movie-and-session-infos-preview">{filme.title}</h1>
             </Footer>
         </>
     )
@@ -68,7 +68,6 @@ const Choice = styled.div`
 const DayOfTheWeek = styled.div`
     margin-left: 24px;
     h1 {
-        font-style: regular;
         font-size: 20px;
         margin-bottom: 22px;
     }
@@ -105,7 +104,6 @@ const Footer = styled.div`
         box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.1);
     }
     h1{
-        font-style: regular;
         font-size: 26px;
         line-height: 30p;
         line-height: 100%;

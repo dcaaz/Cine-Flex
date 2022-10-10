@@ -3,26 +3,35 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-export default function Inputs( {selectedSeats} ) {
+export default function Inputs({ selectedSeats, selectedSeatsIds, movie, hour }) {
 
     const [name, setName] = useState("");
     const [cpf, setCpf] = useState("");
     const navigate = useNavigate();
 
-    function reserve(event){
+    function reserve(event) {
         event.preventDefault();
 
-        const URL="https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many";
+        const URL = "https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many";
 
         const body = {
-            ids: selectedSeats,
+            ids: selectedSeatsIds,
             name: name,
-            cpf: cpf,
+            cpf: cpf
         }
 
         const promise = axios.post(URL, body);
         promise.then(() => {
-            navigate(`/sucess/${body}`);
+            navigate(`/sucess/`, {
+                state: {
+                    hour: hour,
+                    movie: movie,
+                    ids: selectedSeatsIds,
+                    number: selectedSeats,
+                    name: name,
+                    cpf: cpf
+                }
+            });
         })
 
         promise.catch((err) => {
@@ -35,9 +44,9 @@ export default function Inputs( {selectedSeats} ) {
         <>
             <form onSubmit={reserve}>
                 <AllInputs>
-                    <Input>
+                    <Input data-identifier="buyer-name-input">
                         <label htmlFor="name">Nome do Comprador:</label>
-                        <input 
+                        <input
                             id="name"
                             placeholder="   Digite seu nome..."
                             onChange={(e) => setName(e.target.value)}
@@ -46,7 +55,7 @@ export default function Inputs( {selectedSeats} ) {
                         />
                     </Input>
 
-                    <Input>
+                    <Input data-identifier="buyer-cpf-input">
                         <label htmlFor="cpf">CPF do Comprador:</label>
                         <input
                             id="cpf"
@@ -58,9 +67,9 @@ export default function Inputs( {selectedSeats} ) {
                     </Input>
                 </AllInputs>
                 <Reserve>
-                        <button type="submit">
-                            <h1>Reservar assento(s)</h1>
-                        </button>
+                    <button type="submit" data-identifier="reservation-btn">
+                        <h1>Reservar assento(s)</h1>
+                    </button>
                 </Reserve>
             </form>
         </>

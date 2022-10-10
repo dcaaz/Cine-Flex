@@ -34,7 +34,7 @@ export default function PostersPage() {
             </Choice>
             <Main>
                 {image.map((img) =>
-                    <Poster key={img.id}>
+                    <Poster key={img.id} data-identifier="movie-outdoor">
                         <Link to={`/sessoes/${img.id}`}>
                             <img src={img.posterURL} alt="Capa do Filme" />
                         </Link>
