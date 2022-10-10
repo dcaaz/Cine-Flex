@@ -12,7 +12,6 @@ export default function PostersPage() {
         const promise = axios.get(url);
 
         promise.then((resp) => {
-            console.log(resp.data);
             setImage(resp.data);
         })
 

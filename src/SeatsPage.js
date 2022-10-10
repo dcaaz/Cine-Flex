@@ -1,15 +1,43 @@
-//import axios from "axios";
-//import React, { useEffect, useState } from "react";
-//import { Link } from "react-router-dom";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import Inputs from "./SeatsInput";
 
 export default function SeatsPage() {
+    const { idSessao } = useParams();
 
-    const numeros = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50];
+    const [place, setPlace] = useState({});
+    const [seats, setSeats] = useState([]);
+    const [selectedSeats, setSelectedSeats] = useState([]);
 
-    function clickedSeat(num, i) {
-        console.log(num, i);
+    useEffect(() => {
+        const promise = axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${idSessao}/seats`);
+
+        promise.then((resp) => {
+            let respData = resp.data;
+
+            console.log("resposta da promise", respData);
+            setPlace(respData);
+            setSeats(respData.seats);
+        })
+
+        promise.catch((err) => {
+            console.log("erro", err.response.data);
+        })
+    }, []);
+
+    function clickedSeat(seat, i) {
+        let newSeat = seat;
+        let newSeats = seats;
+
+        newSeat.selected = !seat.selected;
+        newSeats[i] = newSeat;
+
+        setSeats([...newSeats]);
+
+        let newSelectedSeats = newSeats.filter((seat) => seat.selected).map((seat) => seat.name);
+        setSelectedSeats(newSelectedSeats);
     }
 
     return (
@@ -18,35 +46,45 @@ export default function SeatsPage() {
                 <h1>Selecione o(s) assento(s)</h1>
             </Choice>
             <Seats>
-                {numeros.map((num, i) =>
+                {seats.map((seat, i) => <Seat
+                key={i} 
+                back={seat.isAvailable ? seat.selected ? '#1AAE9E' : '#C3CFD9' : '#FBE192'} 
+                border={seat.isAvailable ? seat.selected ? '#0E7D71' : '#808F9D' : '#F7C52B'}>
                     <button
                         key={i}
-                        onClick={() => clickedSeat(num, i)}
+                        onClick={seat.isAvailable ? () => clickedSeat(seat, i) : null}
                     >
-                        <h1>{num}</h1>
+                        <h1>{seat.name}</h1>
                     </button>
+                </Seat>
                 )}
             </Seats>
             <Instructions>
                 <Info>
-                    <button></button>
+                    <Button1></Button1>
                     <h1>Selecionado</h1>
                 </Info>
                 <Info>
-                    <button></button>
+                    <Button2></Button2>
                     <h1>Disponível</h1>
                 </Info>
                 <Info>
-                    <button></button>
+                    <Button3></Button3>
                     <h1>Indisponível</h1>
                 </Info>
             </Instructions>
-            
-            <Inputs />
 
+            <Inputs />
         </>
     )
 }
+
+const Seat = styled.div`
+            button {
+            background-color: ${props => props.back};
+            border-color: ${props => props.border};
+    }
+`
 
 const Choice = styled.div`
             height: 110px;
@@ -72,9 +110,7 @@ const Seats = styled.div`
             height: 26px;
             margin-left: 8px;
             margin-bottom: 18px;
-            background-color: #C3CFD9;
             border-radius: 12px;
-            border-color: #808F9D;
             border-style: solid;
     }
             h1{
@@ -104,16 +140,6 @@ const Info = styled.div`
         display: flex;
         flex-direction: column;
         align-items: center;
-        button {
-            width: 26px;
-            height: 26px;
-            margin: 0px 40px;
-            margin-top: 16px;
-            margin-bottom: 1px;
-            border-radius: 12px;
-            border-color: #808F9D;
-            border-style: solid;
-            } 
             h1 {
             font-style: regular;
             font-size: 13px;
@@ -121,4 +147,23 @@ const Info = styled.div`
             align-items: center;
             margin: 0px 25px;
     }
+`
+
+const Button1 = styled.div`
+    width: 26px;
+    height: 26px;
+    margin: 0px 40px;
+    margin-top: 16px;
+    margin-bottom: 1px;
+    border-radius: 12px;
+    background-color: #1AAE9E;
+    border-style: solid;
+`
+
+const Button2 = styled(Button1)`
+    background-color: #C3CFD9;
+`
+
+const Button3 = styled(Button1)`
+    background-color: #FBE192;
 `

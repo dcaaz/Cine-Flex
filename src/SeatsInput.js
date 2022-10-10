@@ -1,10 +1,7 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export default function Inputs() {
-    
-    function confirmReservation(){
-        alert("Reservado");
-    }
 
     return (
         <>
@@ -28,7 +25,9 @@ export default function Inputs() {
                 </Input>
             </AllInputs>
             <Reserve>
-            <button onClick={confirmReservation}><h1>Reservar assento(s)</h1></button>
+                <Link to="/sucess/:idSucess">
+                    <button><h1>Reservar assento(s)</h1></button>
+                </Link>
             </Reserve>
         </>
     )

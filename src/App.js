@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import PostersPage from "./PostersPage";
 import SessionPage from "./SessionPage";
 import SeatsPage from "./SeatsPage";
+import SucessPage from "./SucessPage";
 
 export default function App() {
 
@@ -16,12 +17,10 @@ export default function App() {
                     <h1>CINEFLEX</h1>
                 </Header>
                 <Routes>
-                    <Route path="/" element={<PostersPage />}>
-                    </Route>
-                    <Route path="/sessoes/:idFilme" element={<SessionPage />}> {/*dois pontos indica que a variável alterará */}
-                    </Route>
-                    <Route path="/assentos/:idSessao" element={<SeatsPage />}>
-                    </Route>
+                    <Route path="/" element={<PostersPage />}></Route>
+                    <Route path="/sessoes/:idFilme" element={<SessionPage />}></Route>
+                    <Route path="/assentos/:idSessao" element={<SeatsPage />}></Route>
+                    <Route path="/sucess/:idSucess" element={<SucessPage />}></Route>
                 </Routes>
             </All>
         </BrowserRouter>
