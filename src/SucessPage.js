@@ -11,7 +11,7 @@ export default function SucessPage() {
                 <h1>Pedido feito com sucesso!</h1>
             </Choice>
 
-            <Confirm>
+            <Confirm data-identifier="movie-session-infos-reserve-finished">
 
                 <Top>
                     <h1>FIlme e sessão</h1>
@@ -24,14 +24,14 @@ export default function SucessPage() {
                 <Top>
                     <h1>Ingressos</h1>
                 </Top>
-                <Dice>
+                <Dice data-identifier="seat-infos-reserve-finished">
                     {location.state.number.map((i, indice) =>
                         <h1 key={indice}>
                             Assento {i}
                         </h1>)}
                 </Dice>
 
-                <Top>
+                <Top data-identifier="buyer-infos-reserve-finished">
                     <h1>Comprador</h1>
                 </Top>
                 <Dice>
@@ -43,7 +43,7 @@ export default function SucessPage() {
 
             <Home>
                 <Link to="/">
-                    <button>
+                    <button data-identifier="back-to-home-btn">
                         <h1>Voltar pra home </h1>
                     </button>
                 </Link>

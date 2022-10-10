@@ -57,7 +57,7 @@ export default function Inputs({ selectedSeats, selectedSeatsIds, movie, hour })
 
                     <Input data-identifier="buyer-cpf-input">
                         <label htmlFor="cpf">CPF do Comprador:</label>
-                        <input
+                        <input 
                             id="cpf"
                             placeholder="   Digite seu CPF..."
                             onChange={(e) => setCpf(e.target.value)}

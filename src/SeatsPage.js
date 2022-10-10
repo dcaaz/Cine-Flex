@@ -66,7 +66,7 @@ export default function SeatsPage() {
                         border={seat.isAvailable ? seat.selected ? '#0E7D71' : '#808F9D' : '#F7C52B'}>
                         <button
                             key={i}
-                            onClick={seat.isAvailable ? () => clickedSeat(seat, i) : null}
+                            onClick={seat.isAvailable ? () => clickedSeat(seat, i) : () => alert("Esse assento não está disponível")}
                         >
                             <h1>{seat.name}</h1>
                         </button>
