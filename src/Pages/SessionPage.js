@@ -1,13 +1,16 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
+import { FaHome } from "react-icons/fa";
 
 export default function SessionPage() {
     const { idFilme } = useParams();
 
     const [filme, setFilme] = useState({});
     const [days, setDays] = useState([]);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         const promise = axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/movies/${idFilme}/showtimes`);
@@ -43,8 +46,13 @@ export default function SessionPage() {
                 </DayOfTheWeek>
             )}
             <Footer>
-                <img src={filme.posterURL} alt="Capa do Filme" data-identifier="movie-img-preview" />
-                <h1 data-identifier="movie-and-session-infos-preview">{filme.title}</h1>
+                <Data>
+                    <img src={filme.posterURL} alt="Capa do Filme" data-identifier="movie-img-preview" />
+                    <h1 data-identifier="movie-and-session-infos-preview">{filme.title}</h1>
+                </Data>
+                <FaHome onClick={() => {
+                    navigate("/");
+                }} />
             </Footer>
         </>
     )
@@ -94,13 +102,25 @@ const Footer = styled.div`
     height: 117px;
     background-color: #AEB3FF;
     display: flex;
+    justify-content: space-between;
     position: fixed;
     align-items: center;
     bottom: 0px;
+    svg {
+    margin-right: 20px;
+    color: #000000;
+    width: 40px;
+    height: 40px;
+    }
+`
+
+const Data = styled.div`
+    display: flex;
+    align-items: center;
     img{
+        margin-left: 20px;
         width: 48px;
         height: 72px;
-        margin-left: 18px;
         border: 1px solid #FFFFFF;
         box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.1);
     }

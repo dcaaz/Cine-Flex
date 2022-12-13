@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import Inputs from "../Components/SeatsInput";
+import { useNavigate } from "react-router-dom";
+import { FaHome } from "react-icons/fa";
 
 export default function SeatsPage() {
     const { idSessao } = useParams();
@@ -12,6 +14,8 @@ export default function SeatsPage() {
     const [selectedSeats, setSelectedSeats] = useState([]);
     const [selectedSeatsIds, setSelectedSeatsIds] = useState([]);
     const [footer, setFooter] = useState([]);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         const promise = axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${idSessao}/seats`);
@@ -32,7 +36,7 @@ export default function SeatsPage() {
     function clickedSeat(seat, i) {
         const newSeat = seat;
         const newSeats = seats;
-        
+
         newSeat.selected = !seat.selected;
         newSeats[i] = newSeat;
 
@@ -87,16 +91,21 @@ export default function SeatsPage() {
                 </Info>
             </Instructions>
 
-            <Inputs 
-                
+            <Inputs
+
                 selectedSeats={selectedSeats}
                 selectedSeatsIds={selectedSeatsIds}
                 movie={footer.title}
                 hour={place} />
 
             <Footer>
-                <img src={footer.posterURL} alt="Capa do Filme" />
-                <h1>{footer.title}</h1>
+                <Data>
+                    <img src={footer.posterURL} alt="Capa do Filme" />
+                    <h1>{footer.title}</h1>
+                </Data>
+                <FaHome onClick={() => {
+                    navigate("/");
+                }} />
             </Footer>
         </>
     )
@@ -194,13 +203,25 @@ const Footer = styled.div`
     height: 117px;
     background-color: #AEB3FF;
     display: flex;
+    justify-content: space-between;
     position: fixed;
     align-items: center;
     bottom: 0px;
+    svg {
+    margin-right: 20px;
+    color: #000000;
+    width: 40px;
+    height: 40px;
+    }
+`
+
+const Data = styled.div`
+    display: flex;
+    align-items: center;
     img{
+        margin-left: 20px;
         width: 48px;
         height: 72px;
-        margin-left: 18px;
         border: 1px solid #FFFFFF;
         box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.1);
     }
