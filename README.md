@@ -1,8 +1,8 @@
 # Cineflex
 
-- Neste projeto, fiz uma Single-Page Application (SPA) para um cinema, usando React Router!
+- Neste projeto, fiz uma Single-Page Application (SPA) de um cinema, usando React Router!
 
-<h4 style="color: blue">Experimente agora em: https://projeto10-cineflex-gray-five.vercel.app/<h4>
+Experimente agora em: https://projeto10-cineflex-gray-five.vercel.app/
 
 ## About
 
