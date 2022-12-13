@@ -30,8 +30,8 @@ export default function SeatsPage() {
     }, []);
 
     function clickedSeat(seat, i) {
-        let newSeat = seat;
-        let newSeats = seats;
+        const newSeat = seat;
+        const newSeats = seats;
         console.log("seat", seat);
 
         newSeat.selected = !seat.selected;
@@ -39,7 +39,7 @@ export default function SeatsPage() {
 
         setSeats([...newSeats]);
 
-        let newSelectedSeats = newSeats.filter((seat) => seat.selected);
+        const newSelectedSeats = newSeats.filter((seat) => seat.selected);
 
         setSelectedSeats(newSelectedSeats.map((seat) => seat.name));
         setSelectedSeatsIds(newSelectedSeats.map((seat) => seat.id));

@@ -10,7 +10,7 @@ export default function Inputs({ selectedSeats, selectedSeatsIds, movie, hour })
     const navigate = useNavigate();
 
     function reserve(event) {
-        event.preventDefault();
+        event.preventDefault(); //para não apagar o que estiver escrito no campo do input
 
         const URL = "https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many";
 
@@ -57,7 +57,7 @@ export default function Inputs({ selectedSeats, selectedSeatsIds, movie, hour })
 
                     <Input data-identifier="buyer-cpf-input">
                         <label htmlFor="cpf">CPF do Comprador:</label>
-                        <input 
+                        <input
                             id="cpf"
                             placeholder="   Digite seu CPF..."
                             onChange={(e) => setCpf(e.target.value)}
