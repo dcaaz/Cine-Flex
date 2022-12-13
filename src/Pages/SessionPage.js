@@ -78,8 +78,8 @@ const Buttons = styled.div`
     display: flex;
     flex-wrap: nowrap;  
     button {
-        background-color: #E8833A;
-        color: #FFFFFF;
+        background-color: #FFCC6F;
+        color: #000000;
         width: 83px;
         height: 43px;
         margin-bottom: 23px;
@@ -92,7 +92,7 @@ const Buttons = styled.div`
 const Footer = styled.div`
     width: 100%;
     height: 117px;
-    background-color: #DFE6ED;
+    background-color: #AEB3FF;
     display: flex;
     position: fixed;
     align-items: center;

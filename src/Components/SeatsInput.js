@@ -12,32 +12,38 @@ export default function Inputs({ selectedSeats, selectedSeatsIds, movie, hour })
     function reserve(event) {
         event.preventDefault(); //para não apagar o que estiver escrito no campo do input
 
-        const URL = "https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many";
+        console.log("cpf", cpf.length)
 
-        const body = {
-            ids: selectedSeatsIds,
-            name: name,
-            cpf: cpf
+        if(cpf.length < 11 || cpf.length > 11){
+            alert("Insira um CPF válido, com 11 dígitos :)")
+        } else {
+            const URL = "https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many";
+
+            const body = {
+                ids: selectedSeatsIds,
+                name: name,
+                cpf: cpf
+            }
+    
+            const promise = axios.post(URL, body);
+            promise.then(() => {
+                navigate(`/sucess/`, {
+                    state: {
+                        hour: hour,
+                        movie: movie,
+                        ids: selectedSeatsIds,
+                        number: selectedSeats,
+                        name: name,
+                        cpf: cpf
+                    }
+                });
+            })
+    
+            promise.catch((err) => {
+                console.log("erro", err.response.data.mensagem);
+                alert(err.response.data.mensagem);
+            })
         }
-
-        const promise = axios.post(URL, body);
-        promise.then(() => {
-            navigate(`/sucess/`, {
-                state: {
-                    hour: hour,
-                    movie: movie,
-                    ids: selectedSeatsIds,
-                    number: selectedSeats,
-                    name: name,
-                    cpf: cpf
-                }
-            });
-        })
-
-        promise.catch((err) => {
-            console.log("erro", err.response.data.mensagem);
-            alert(err.response.data.mensagem);
-        })
     }
 
     return (
@@ -49,6 +55,7 @@ export default function Inputs({ selectedSeats, selectedSeatsIds, movie, hour })
                         <input
                             id="name"
                             type="text"
+                            autocomplete="off"
                             placeholder="   Digite seu nome..."
                             onChange={(e) => setName(e.target.value)}
                             value={name}
@@ -61,6 +68,7 @@ export default function Inputs({ selectedSeats, selectedSeatsIds, movie, hour })
                         <input
                             id="cpf"
                             type="number"
+                            autocomplete= "off"
                             placeholder="   Digite seu CPF..."
                             onChange={(e) => setCpf(e.target.value)}
                             value={cpf}

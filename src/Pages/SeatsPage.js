@@ -192,7 +192,7 @@ const Button3 = styled(Button1)`
 const Footer = styled.div`
     width: 100%;
     height: 117px;
-    background-color: #DFE6ED;
+    background-color: #AEB3FF;
     display: flex;
     position: fixed;
     align-items: center;
