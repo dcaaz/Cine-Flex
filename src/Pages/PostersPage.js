@@ -65,8 +65,10 @@ const Main = styled.div`
 `
 
 const Poster = styled.div`
-    margin: 11px 28px;
     img{
+        margin-right: 10px;
+        margin-left: 10px;
+        margin-bottom: 10px;
         width: 129px;
         height: 193px;
         border: 1px solid #FFFFFF;
