@@ -2,10 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import GlobalStyle from "./GlobalStyle";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import PostersPage from "./PostersPage";
-import SessionPage from "./SessionPage";
-import SeatsPage from "./SeatsPage";
-import SucessPage from "./SucessPage";
+import PostersPage from "./Pages/PostersPage";
+import SessionPage from "./Pages/SessionPage";
+import SeatsPage from "./Pages/SeatsPage";
+import SucessPage from "./Pages/SucessPage";
+import Logo from "./Image/Logo.png"
 
 export default function App() {
 
@@ -14,7 +15,7 @@ export default function App() {
             <All>
                 <GlobalStyle />
                 <Header>
-                    <h1>CINEFLEX</h1>
+                    <img src={Logo}></img>
                 </Header>
                 <Routes>
                     <Route path="/" element={<PostersPage />}></Route>
@@ -28,23 +29,20 @@ export default function App() {
 }
 
 const All = styled.div`
-    width: 375px;
     height: 100vh;
     align-items: center;
 `
 
 const Header = styled.div`
-    background-color: #C3CFD9;
-    height:  67px;
+    background-color: #AEB3FF;
+    height:  80px;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    h1 {
-        color: #E8833A;
-        font-style: normal;
-        font-size: 34px;
-        font-weight: 400;
-        line-height: 40px;
+    img {
+        margin-top: 10px;
+        width: 250px;
+        height: 250px;
     }
 `

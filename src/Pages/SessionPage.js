@@ -5,7 +5,6 @@ import styled from "styled-components";
 
 export default function SessionPage() {
     const { idFilme } = useParams();
-    console.log("idFilme", idFilme);
 
     const [filme, setFilme] = useState({});
     const [days, setDays] = useState([]);
@@ -61,12 +60,14 @@ const Choice = styled.div`
         font-weight: 400;
         font-size: 24px;
         line-height: 28px;
-        color: #293845;
+        color: #7068FF;
     }
 `
 
 const DayOfTheWeek = styled.div`
-    margin-left: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     h1 {
         font-size: 20px;
         margin-bottom: 22px;
@@ -89,7 +90,7 @@ const Buttons = styled.div`
 `
 
 const Footer = styled.div`
-    width: 375px;
+    width: 100%;
     height: 117px;
     background-color: #DFE6ED;
     display: flex;

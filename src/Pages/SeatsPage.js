@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import Inputs from "./SeatsInput";
+import Inputs from "../Components/SeatsInput";
 
 export default function SeatsPage() {
     const { idSessao } = useParams();
@@ -32,8 +32,7 @@ export default function SeatsPage() {
     function clickedSeat(seat, i) {
         const newSeat = seat;
         const newSeats = seats;
-        console.log("seat", seat);
-
+        
         newSeat.selected = !seat.selected;
         newSeats[i] = newSeat;
 
@@ -66,7 +65,7 @@ export default function SeatsPage() {
                         border={seat.isAvailable ? seat.selected ? '#0E7D71' : '#808F9D' : '#F7C52B'}>
                         <button
                             key={i}
-                            onClick={seat.isAvailable ? () => clickedSeat(seat, i) : () => alert("Esse assento não está disponível")}
+                            onClick={seat.isAvailable ? () => clickedSeat(seat, i) : () => alert("Esse assento não está disponível :(")}
                         >
                             <h1>{seat.name}</h1>
                         </button>
@@ -120,7 +119,7 @@ const Choice = styled.div`
             font-weight: 400;
             font-size: 24px;
             line-height: 28px;
-            color: #293845;
+            color: #7068FF;
     }
 `
 
@@ -191,10 +190,11 @@ const Button3 = styled(Button1)`
 `
 
 const Footer = styled.div`
-    width: 375px;
+    width: 100%;
     height: 117px;
     background-color: #DFE6ED;
     display: flex;
+    position: fixed;
     align-items: center;
     bottom: 0px;
     img{

@@ -48,6 +48,7 @@ export default function Inputs({ selectedSeats, selectedSeatsIds, movie, hour })
                         <label htmlFor="name">Nome do Comprador:</label>
                         <input
                             id="name"
+                            type="text"
                             placeholder="   Digite seu nome..."
                             onChange={(e) => setName(e.target.value)}
                             value={name}
@@ -59,6 +60,7 @@ export default function Inputs({ selectedSeats, selectedSeatsIds, movie, hour })
                         <label htmlFor="cpf">CPF do Comprador:</label>
                         <input
                             id="cpf"
+                            type="number"
                             placeholder="   Digite seu CPF..."
                             onChange={(e) => setCpf(e.target.value)}
                             value={cpf}
@@ -78,11 +80,10 @@ export default function Inputs({ selectedSeats, selectedSeatsIds, movie, hour })
 
 const AllInputs = styled.div`
     display: flex;
+    align-items: center;
     flex-direction: column;
     margin-top: 42px;
     margin-bottom: 50px;
-    margin-right: 24px;
-    margin-left: 24px;
 `
 const Input = styled.div`
     display: flex;
@@ -111,14 +112,14 @@ const Reserve = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 30px;
     button{
         width: 225px;
         height: 42px;
         border-radius: 3px;
         border-style: solid;
-        border-color:#E8833A;
-        background-color: #E8833A;
+        border-color: #7745FF;
+        background-color: #A09AFF;
+        margin-bottom: 200px;
     }
     h1 {
         font-style: regular;

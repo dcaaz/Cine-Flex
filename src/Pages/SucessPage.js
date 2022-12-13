@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 export default function SucessPage() {
     const location = useLocation();
-    console.log("location", location);
 
     return (
         <>
@@ -14,7 +13,7 @@ export default function SucessPage() {
             <Confirm data-identifier="movie-session-infos-reserve-finished">
 
                 <Top>
-                    <h1>FIlme e sessão</h1>
+                    <h1>Filme e sessão</h1>
                 </Top>
                 <Dice>
                     <h1>{location.state.movie}</h1>
@@ -58,21 +57,20 @@ const Choice = styled.div`
             align-items: center;
             justify-content: center;
             h1{
-            width: 150px;
             font-style: bold;
             font-weight: 700;
             font-size: 24px;
             line-height: 28px;
             line-height: 100%;
-            color:#247A6B;
-    }
+            color: #7068FF;
+            }
 `
 
 const Confirm = styled.div`
     display: flex;
+    align-items: center;
     flex-direction: column;
-    margin-bottom: 62px;
-    margin-left: 69px;
+    margin-bottom: 62px
 `
 
 const Top = styled.div`
@@ -85,11 +83,15 @@ const Top = styled.div`
 `
 
 const Dice = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
         h1 {
             font-size: 22px;
             line-height: 26px;
             line-height: 100%;
             font-weight: 400;
+            margin-top: 10px;
             color: #293845;
         }
 `
@@ -103,8 +105,8 @@ const Home = styled.div`
         height: 42px;
         border-radius: 3px;
         border-style: solid;
-        border-color:#E8833A;
-        background-color: #E8833A;
+        border-color: #7745FF;
+        background-color: #A09AFF;
     }
     h1 {
         font-size: 18px;

@@ -55,7 +55,7 @@ const Choice = styled.div`
         font-weight: 400;
         font-size: 24px;
         line-height: 28px;
-        color: #293845;
+        color: #7068FF;
     }
 `
 
