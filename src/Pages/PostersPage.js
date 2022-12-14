@@ -61,14 +61,14 @@ const Choice = styled.div`
 
 const Main = styled.div`
     display: flex;
-    flex-wrap: wrap
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
 `
 
 const Poster = styled.div`
     img{
-        margin-right: 10px;
-        margin-left: 10px;
-        margin-bottom: 10px;
+        margin: 10px;
         width: 129px;
         height: 193px;
         border: 1px solid #FFFFFF;
