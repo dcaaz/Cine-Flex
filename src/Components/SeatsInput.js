@@ -12,10 +12,12 @@ export default function Inputs({ selectedSeats, selectedSeatsIds, movie, hour })
     function reserve(event) {
         event.preventDefault(); //para não apagar o que estiver escrito no campo do input
 
-        console.log("cpf", cpf.length)
+        console.log("seats", selectedSeats)
 
         if(cpf.length < 11 || cpf.length > 11){
             alert("Insira um CPF válido, com 11 dígitos :)")
+        } else if(selectedSeats.length === 0){
+            alert("Ops, você poderia selecionar o assento para prosseguirmos? :)")
         } else {
             const URL = "https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many";
 
