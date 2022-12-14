@@ -45,11 +45,7 @@ export default function SeatsPage() {
         const newSelectedSeats = newSeats.filter((seat) => seat.selected);
 
         setSelectedSeats(newSelectedSeats.map((seat) => seat.name));
-        setSelectedSeatsIds(newSelectedSeats.map((seat) => seat.id));
-
-        console.log(newSelectedSeats.map((seat) => seat.name));
-        console.log(newSelectedSeats.map((seat) => seat.id));
-
+        setSelectedSeatsIds(newSelectedSeats.map((seat) => seat.id))
     }
 
     if (place.length === 0) {
