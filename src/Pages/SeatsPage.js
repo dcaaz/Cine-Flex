@@ -131,8 +131,7 @@ const Choice = styled.div`
 const Seats = styled.div`
             display: flex;
             flex-wrap: wrap;
-            margin-left: 24px;
-            margin-right: 24px;
+            margin: 5px;
             button {
             width: 26px;
             height: 26px;
@@ -141,10 +140,11 @@ const Seats = styled.div`
             border-radius: 12px;
             border-style: solid;
     }
-            h1{
+            h1 {
             font-size: 11px;
-            line-height: 13px;
+            display: flex;
             align-items: center;
+            justify-content: center;
     }
 `
 
