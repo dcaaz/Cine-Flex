@@ -130,6 +130,8 @@ const Choice = styled.div`
 
 const Seats = styled.div`
             display: flex;
+            justify-content: center;
+            align-items: center;
             flex-wrap: wrap;
             margin: 5px;
             button {
@@ -139,13 +141,13 @@ const Seats = styled.div`
             margin-bottom: 18px;
             border-radius: 12px;
             border-style: solid;
-    }
+            }
             h1 {
             font-size: 11px;
             display: flex;
             align-items: center;
             justify-content: center;
-    }
+            }
 `
 
 const Instructions = styled.div`
