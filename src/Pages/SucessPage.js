@@ -1,118 +1,54 @@
 import { Link, useLocation } from "react-router-dom";
-import styled from "styled-components";
+import { FooterFilm } from "../Components/Footer";
+import { Dice, Top, PageTitle, Confirm, DefaultButton, FontH1 } from "../Style/Style";
 
 export default function SucessPage() {
+
     const location = useLocation();
 
     return (
         <>
-            <Choice>
-                <h1>Pedido feito com sucesso!</h1>
-            </Choice>
+            <PageTitle>
+                <FontH1>Order placed successfully!</FontH1>
+            </PageTitle>
 
-            <Confirm data-identifier="movie-session-infos-reserve-finished">
-
+            <Confirm>
                 <Top>
-                    <h1>Filme e sessão</h1>
+                    <h1>Film and session</h1>
                 </Top>
                 <Dice>
-                    <h1>{location.state.movie}</h1>
-                    <h1>{location.state.hour.day.date} {location.state.hour.name}</h1>
+                    <FontH1>{location.state.movie}</FontH1>
+                    <FontH1>{location.state.hour.day.date} {location.state.hour.name}</FontH1>
                 </Dice>
 
                 <Top>
-                    <h1>Ingressos</h1>
+                    <h1>Tickets</h1>
                 </Top>
-                <Dice data-identifier="seat-infos-reserve-finished">
+                <Dice>
                     {location.state.number.map((i, indice) =>
-                        <h1 key={indice}>
-                            Assento {i}
-                        </h1>)}
+                        <FontH1 key={indice}>
+                            Seat {i}
+                        </FontH1>)}
                 </Dice>
 
-                <Top data-identifier="buyer-infos-reserve-finished">
-                    <h1>Comprador</h1>
+                <Top>
+                    <h1>Buyer</h1>
                 </Top>
                 <Dice>
-                    <h1>Nome: {location.state.name}</h1>
-                    <h1>Cpf: {location.state.cpf}</h1>
+                    <FontH1>Name: {location.state.name}</FontH1>
+                    <FontH1>Cpf: {location.state.cpf}</FontH1>
                 </Dice>
 
             </Confirm>
 
-            <Home>
+            <DefaultButton>
                 <Link to="/">
-                    <button data-identifier="back-to-home-btn">
-                        <h1>Voltar pra home </h1>
+                    <button>
+                        <FontH1>Go back to home</FontH1>
                     </button>
                 </Link>
-            </Home>
+            </DefaultButton>
+            <FooterFilm/>
         </>
     )
 }
-
-const Choice = styled.div`
-            height: 110px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            h1{
-            font-style: bold;
-            font-weight: 700;
-            font-size: 24px;
-            line-height: 28px;
-            line-height: 100%;
-            color: #7068FF;
-            }
-`
-
-const Confirm = styled.div`
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    margin-bottom: 62px
-`
-
-const Top = styled.div`
-        font-style: bold;
-        font-size: 24px;
-        line-height: 28px;
-        line-height: 100%;
-        font-weight: 700;
-        margin-top: 16px;
-`
-
-const Dice = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-        h1 {
-            font-size: 22px;
-            line-height: 26px;
-            line-height: 100%;
-            font-weight: 400;
-            margin-top: 10px;
-            color: #293845;
-        }
-`
-
-const Home = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    button{
-        width: 225px;
-        height: 42px;
-        border-radius: 3px;
-        border-style: solid;
-        border-color: #7745FF;
-        background-color: #A09AFF;
-    }
-    h1 {
-        font-size: 18px;
-        line-height: 21px;
-        line-height: 100%;
-        font-weight: 400;
-        color: #FFFFFF;
-    }
-`

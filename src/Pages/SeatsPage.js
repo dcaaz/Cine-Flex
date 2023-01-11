@@ -1,10 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import styled from "styled-components";
 import Inputs from "../Components/SeatsInput";
-import { useNavigate } from "react-router-dom";
-import { FaHome } from "react-icons/fa";
+import {  PageTitle, Seats, Seat, Instructions, Info, Button1, Button2, Button3, FontH1, Loading } from "../Style/Style";
+import { FooterFilm } from "../Components/Footer";
 
 export default function SeatsPage() {
     const { idSessao } = useParams();
@@ -13,25 +12,21 @@ export default function SeatsPage() {
     const [seats, setSeats] = useState([]);
     const [selectedSeats, setSelectedSeats] = useState([]);
     const [selectedSeatsIds, setSelectedSeatsIds] = useState([]);
-    const [footer, setFooter] = useState([]);
-
-    const navigate = useNavigate();
 
     useEffect(() => {
         const promise = axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${idSessao}/seats`);
 
-        promise.then((resp) => {
-            let respData = resp.data;
+        promise.then((res) => {
+            let resp = res.data;
 
-            setPlace(respData);
-            setSeats(respData.seats);
-            setFooter(respData.movie);
+            setPlace(resp);
+            setSeats(resp.seats);
         })
 
         promise.catch((err) => {
-            console.log("erro", err.response.data);
+            console.log("erro SeatsPage", err.response.data);
         })
-    }, []);
+    }, [idSessao]);
 
     function clickedSeat(seat, i) {
         const newSeat = seat;
@@ -49,189 +44,50 @@ export default function SeatsPage() {
     }
 
     if (place.length === 0) {
-        return <Carregando>CARREGANDO...</Carregando>
+        return <Loading>CARREGANDO...</Loading>
     }
 
     return (
         <>
-            <Choice>
-                <h1>Selecione o(s) assento(s)</h1>
-            </Choice>
-            <Seats data-identifier="seat">
-                {seats.map((seat, i) =>
+            <PageTitle>
+                <FontH1>Select the seats</FontH1>
+            </PageTitle>
+            <Seats>
+                {seats.map((s, i) =>
                     <Seat
                         key={i}
-                        back={seat.isAvailable ? seat.selected ? '#1AAE9E' : '#C3CFD9' : '#FBE192'}
-                        border={seat.isAvailable ? seat.selected ? '#0E7D71' : '#808F9D' : '#F7C52B'}>
+                        back={s.isAvailable ? s.selected ? '#1AAE9E' : '#C3CFD9' : '#FBE192'}
+                        border={s.isAvailable ? s.selected ? '#0E7D71' : '#808F9D' : '#F7C52B'}>
                         <button
                             key={i}
-                            onClick={seat.isAvailable ? () => clickedSeat(seat, i) : () => alert("Esse assento não está disponível :(")}
+                            onClick={s.isAvailable ? () => clickedSeat(s, i) : () => alert("This seat is not available :(")}
                         >
-                            <h1>{seat.name}</h1>
+                            <h1>{s.name}</h1>
                         </button>
                     </Seat>
                 )}
             </Seats>
             <Instructions>
-                <Info data-identifier="seat-selected-subtitle">
+                <Info >
                     <Button1></Button1>
-                    <h1>Selecionado</h1>
+                    <h1>Selected</h1>
                 </Info>
-                <Info data-identifier="seat-available-subtitle">
+                <Info>
                     <Button2></Button2>
-                    <h1>Disponível</h1>
+                    <h1>Available</h1>
                 </Info>
-                <Info data-identifier="seat-unavailable-subtitle">
+                <Info>
                     <Button3></Button3>
-                    <h1>Indisponível</h1>
+                    <h1>Unavailable</h1>
                 </Info>
             </Instructions>
 
             <Inputs
-
                 selectedSeats={selectedSeats}
                 selectedSeatsIds={selectedSeatsIds}
-                movie={footer.title}
                 hour={place} />
 
-            <Footer>
-                <Data>
-                    <img src={footer.posterURL} alt="Capa do Filme" />
-                    <h1>{footer.title}</h1>
-                </Data>
-                <FaHome onClick={() => {
-                    navigate("/");
-                }} />
-            </Footer>
+            <FooterFilm/>
         </>
     )
 }
-
-const Seat = styled.div`
-            button {
-            background-color: ${props => props.back};
-            border-color: ${props => props.border};
-    }
-`
-
-const Choice = styled.div`
-            height: 110px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            h1{
-            font-style: normal;
-            font-weight: 400;
-            font-size: 24px;
-            line-height: 28px;
-            color: #7068FF;
-    }
-`
-
-const Seats = styled.div`
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            margin: 5px;
-            button {
-            width: 26px;
-            height: 26px;
-            margin-left: 8px;
-            margin-bottom: 18px;
-            border-radius: 12px;
-            border-style: solid;
-            }
-            h1 {
-            font-size: 11px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            }
-`
-
-const Instructions = styled.div`
-            display: flex;
-            align-items: center;
-            justify-content: center;
-             & button:first-child {
-            background-color: orange;
-            }
-            & button:nth-child(2) {
-            background-color: #FF922E;
-            }
-            & button:last-child {
-            background-color: #2FBE34;
-            }
-`
-
-const Info = styled.div` 
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-            h1 {
-            font-size: 13px;
-            line-height: 15px;
-            align-items: center;
-            margin: 0px 25px;
-    }
-`
-
-const Button1 = styled.div`
-    width: 26px;
-    height: 26px;
-    margin: 0px 40px;
-    margin-top: 16px;
-    margin-bottom: 1px;
-    border-radius: 12px;
-    background-color: #1AAE9E;
-    border-style: solid;
-`
-
-const Button2 = styled(Button1)`
-    background-color: #C3CFD9;
-`
-
-const Button3 = styled(Button1)`
-    background-color: #FBE192;
-`
-
-const Footer = styled.div`
-    width: 100%;
-    height: 117px;
-    background-color: #AEB3FF;
-    display: flex;
-    justify-content: space-between;
-    position: fixed;
-    align-items: center;
-    bottom: 0px;
-    svg {
-    margin-right: 20px;
-    color: #000000;
-    width: 40px;
-    height: 40px;
-    }
-`
-
-const Data = styled.div`
-    display: flex;
-    align-items: center;
-    img{
-        margin-left: 20px;
-        width: 48px;
-        height: 72px;
-        border: 1px solid #FFFFFF;
-        box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.1);
-    }
-    h1{
-        font-size: 26px;
-        line-height: 30p;
-        line-height: 100%;
-        margin-left: 14px;
-    }
-`
-
-const Carregando = styled.div`
-    font-size: 20px;
-    margin: 10px;
-`

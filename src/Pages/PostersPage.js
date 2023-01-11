@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
+import {  PageTitle, Main, Poster, Loading, FontH1 } from "../Style/Style";
 
 export default function PostersPage() {
 
@@ -11,32 +11,30 @@ export default function PostersPage() {
         const url = "https://mock-api.driven.com.br/api/v8/cineflex/movies";
         const promise = axios.get(url);
 
-        promise.then((resp) => {
-            setImage(resp.data);
+        promise.then((res) => {
+            setImage(res.data);
         })
 
-        promise.catch((erro) => {
-            console.log(erro.response.data);
+        promise.catch((err) => {
+            console.log("err PostersPage", err.response.data);
         })
     }, [])
 
-    // RETORNO ANTECIPACIDO:
-
     if (image.length === 0) {
-        return <Carregando>CARREGANDO...</Carregando>
+        return <Loading>Loading...</Loading>
     }
 
 
     return (
         <>
-            <Choice>
-                <h1>Selecione o filme</h1>
-            </Choice>
+            < PageTitle>
+                <FontH1>Select the movie</FontH1>
+            </ PageTitle>
             <Main>
-                {image.map((img) =>
-                    <Poster key={img.id} data-identifier="movie-outdoor">
-                        <Link to={`/sessoes/${img.id}`}>
-                            <img src={img.posterURL} alt="Capa do Filme" />
+                {image.map((i) =>
+                    <Poster key={i.id}>
+                        <Link to={`/sessions/${i.id}`}>
+                            <img src={i.posterURL} alt="Capa do Filme" />
                         </Link>
                     </Poster>
                 )}
@@ -44,39 +42,3 @@ export default function PostersPage() {
         </>
     )
 }
-
-const Choice = styled.div`
-    height: 110px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    h1{
-        font-style: normal;
-        font-weight: 400;
-        font-size: 24px;
-        line-height: 28px;
-        color: #7068FF;
-    }
-`
-
-const Main = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-`
-
-const Poster = styled.div`
-    img{
-        margin: 10px;
-        width: 129px;
-        height: 193px;
-        border: 1px solid #FFFFFF;
-        box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.1);
-    }
-`
-
-const Carregando = styled.div`
-    font-size: 20px;
-    margin: 10px;
-`
