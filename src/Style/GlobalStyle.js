@@ -35,6 +35,7 @@ const GlobalStyle = createGlobalStyle`
     body {
         line-height: 1;
         background-color: #e5e5e5;
+        cursor:pointer;
     }
     ol, ul {
         list-style: none;
