@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { FooterFilm } from "../Components/Footer";
-import { Dice, Top, PageTitle, Confirm, DefaultButton, FontH1 } from "../Style/Style";
+import { Dice, Top, PageTitle, Confirm, DefaultButton, FontMain, FontTitle } from "../Style/Style";
 
 export default function SucessPage() {
 
@@ -9,7 +9,7 @@ export default function SucessPage() {
     return (
         <>
             <PageTitle>
-                <FontH1>Order placed successfully!</FontH1>
+                <FontTitle>Order placed successfully!</FontTitle>
             </PageTitle>
 
             <Confirm>
@@ -17,8 +17,8 @@ export default function SucessPage() {
                     <h1>Film and session</h1>
                 </Top>
                 <Dice>
-                    <FontH1>{location.state.movie}</FontH1>
-                    <FontH1>{location.state.hour.day.date} {location.state.hour.name}</FontH1>
+                    <FontMain>{location.state.movie}</FontMain>
+                    <FontMain>{location.state.hour.day.date} {location.state.hour.name}</FontMain>
                 </Dice>
 
                 <Top>
@@ -26,17 +26,17 @@ export default function SucessPage() {
                 </Top>
                 <Dice>
                     {location.state.number.map((i, indice) =>
-                        <FontH1 key={indice}>
+                        <FontMain key={indice}>
                             Seat {i}
-                        </FontH1>)}
+                        </FontMain>)}
                 </Dice>
 
                 <Top>
                     <h1>Buyer</h1>
                 </Top>
                 <Dice>
-                    <FontH1>Name: {location.state.name}</FontH1>
-                    <FontH1>Cpf: {location.state.cpf}</FontH1>
+                    <FontMain>Name: {location.state.name}</FontMain>
+                    <FontMain>Cpf: {location.state.cpf}</FontMain>
                 </Dice>
 
             </Confirm>
@@ -44,7 +44,7 @@ export default function SucessPage() {
             <DefaultButton>
                 <Link to="/">
                     <button>
-                        <FontH1>Go back to home</FontH1>
+                        <FontMain>Go back to home</FontMain>
                     </button>
                 </Link>
             </DefaultButton>

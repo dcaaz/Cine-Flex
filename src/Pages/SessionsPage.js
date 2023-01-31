@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState, useContext } from "react";
 import { Link, useParams } from "react-router-dom";
-import { DayOfTheWeek,  PageTitle, Buttons, FontH1, Scroll } from "../Style/Style";
+import { DayOfTheWeek,  PageTitle, Buttons,Scroll, FontTitle } from "../Style/Style";
 import { AuthContext } from "../Ayth";
 import { FooterFilm } from "../Components/Footer";
 
@@ -30,7 +30,7 @@ export default function SessionPage() {
     return (
         <>
             < PageTitle>
-                <FontH1>Select the time</FontH1>
+                <FontTitle>Select the time</FontTitle>
             </ PageTitle>
             <Scroll>
             {days.map((d) =>

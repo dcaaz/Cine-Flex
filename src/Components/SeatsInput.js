@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { AllInputs, DefaultButton, FontH1, Input } from "../Style/Style";
+import { AllInputs, DefaultButton, FontMain, Input } from "../Style/Style";
 
 export default function Inputs({ selectedSeats, selectedSeatsIds, movie, hour }) {
 
@@ -79,7 +79,7 @@ export default function Inputs({ selectedSeats, selectedSeatsIds, movie, hour })
                 </AllInputs>
                 <DefaultButton>
                     <button>
-                        <FontH1>Reserve seat</FontH1>
+                        <FontMain>Reserve seat</FontMain>
                     </button>
                 </DefaultButton>
             </form>

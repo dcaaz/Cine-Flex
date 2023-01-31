@@ -3,15 +3,15 @@ import COLORS from "./Constant/Colors";
 
 export const Header = styled.div`
     width: 100vw;
-    height:  9%;
+    height: 10vh;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: ${COLORS.base};
     img {
         margin-top: 10px;
-        width: 300px;
-        height: 300px;
+        width: 250px;
+        height: 250px;
     }
 `
 export const Footer = styled.div`
@@ -30,7 +30,7 @@ export const Footer = styled.div`
     height: 40px;
     }
 `
-export const  PageTitle = styled.div`
+export const PageTitle = styled.div`
     height: 110px;
     display: flex;
     align-items: center;
@@ -38,15 +38,21 @@ export const  PageTitle = styled.div`
     color: ${COLORS.base};
 `
 export const Scroll = styled.div`
-    padding-bottom: 100px;
+    padding-bottom: 100px; 
 `
-export const FontH1 = styled.h1`
+export const FontMain = styled.h1`
+    font-family: "Roboto";
+    font-size: 20px;
+    line-height: 20px;
+    letter-spacing: 0.04em;
+`
+export const FontTitle = styled.h1`
     font-family: "Roboto";
     font-size: 25px;
-    font-weight: 600;
-    line-height: 28px;
+    font-weight: 700;
+    line-height: 20px;
     letter-spacing: 0.04em;
-    margin-bottom: 2px;
+    color: ${COLORS.title}
 `
 export const Main = styled.div`
     display: flex;
@@ -104,31 +110,28 @@ export const Data = styled.div`
     }
 `
 export const Seat = styled.div`
-            button {
-            background-color: ${props => props.back};
-            border-color: ${props => props.border};
+    button {
+        background-color: ${props => props.back};
+        border-color: ${props => props.border};
+        width: 26px;
+        height: 26px;
+        margin-left: 8px;
+        margin-bottom: 18px;
+        border-radius: 12px;
+        border-style: solid;
+    }
+    h1 {
+        font-size: 11px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 `
 export const Seats = styled.div`
-            width: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-wrap: wrap;
-            button {
-            width: 26px;
-            height: 26px;
-            margin-left: 8px;
-            margin-bottom: 18px;
-            border-radius: 12px;
-            border-style: solid;
-            }
-            h1 {
-            font-size: 11px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            }
 `
 export const Instructions = styled.div`
             display: flex;
@@ -176,7 +179,7 @@ export const AllInputs = styled.div`
     align-items: center;
     flex-direction: column;
     margin-top: 42px;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
 `
 export const Input = styled.div`
     display: flex;
@@ -189,7 +192,9 @@ export const Input = styled.div`
         line-height: 21px;
     }
     input {
-        width: 20vw;
+        width: 40vw;
+        min-width: 200px;
+        max-width: 400px;
         height: 51px;  
         border-radius: 3px;
         border-color: #D4D4D4;
@@ -210,6 +215,7 @@ export const DefaultButton = styled.div`
     justify-content: center;
     button{
         width: 20vw;
+        min-width: 200px;
         height: 42px;
         border-radius: 10px;
         border-style: none;

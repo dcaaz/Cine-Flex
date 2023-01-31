@@ -34,7 +34,7 @@ const GlobalStyle = createGlobalStyle`
     }
     body {
         line-height: 1;
-        //font-family: 'Roboto';
+        background-color: #e5e5e5;
     }
     ol, ul {
         list-style: none;

@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import {  PageTitle, Main, Poster, Loading, FontH1 } from "../Style/Style";
+import {  PageTitle, Main, Poster, Loading, FontTitle } from "../Style/Style";
 
 export default function PostersPage() {
 
@@ -28,7 +28,7 @@ export default function PostersPage() {
     return (
         <>
             < PageTitle>
-                <FontH1>Select the movie</FontH1>
+                <FontTitle>Select the movie</FontTitle>
             </ PageTitle>
             <Main>
                 {image.map((i) =>

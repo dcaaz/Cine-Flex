@@ -1,7 +1,8 @@
 const COLORS = {
-    base: "#B3D6FE",
-    backHour: "#FAAF1B",
-    button: "#FA4149",
+    base: "#D2BFB8",
+    backHour: "#efc473",
+    button: "#9eabba",
+    title: "#a75c57"
 }
 
 export default COLORS;

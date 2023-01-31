@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 import GlobalStyle from "./Style/GlobalStyle";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import PostersPage from "./Pages/PostersPage";
@@ -13,7 +12,6 @@ export default function App() {
 
     return (
         <BrowserRouter>
-            <All>
                 <GlobalStyle />
                 <InitialHeader/>
                 <AuthProvider>
@@ -24,12 +22,6 @@ export default function App() {
                         <Route path="/sucess/" element={<SucessPage />}></Route>
                     </Routes>
                 </AuthProvider>
-            </All>
         </BrowserRouter>
     )
 }
-
-const All = styled.div`
-    height: 100vh;
-    align-items: center;
-`

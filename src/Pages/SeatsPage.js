@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Inputs from "../Components/SeatsInput";
-import {  PageTitle, Seats, Seat, Instructions, Info, Button1, Button2, Button3, FontH1, Loading } from "../Style/Style";
+import {  PageTitle, Seats, Seat, Instructions, Info, Button1, Button2, Button3, FontTitle, Loading } from "../Style/Style";
 import { FooterFilm } from "../Components/Footer";
 
 export default function SeatsPage() {
@@ -50,7 +50,7 @@ export default function SeatsPage() {
     return (
         <>
             <PageTitle>
-                <FontH1>Select the seats</FontH1>
+                <FontTitle>Select the seats</FontTitle>
             </PageTitle>
             <Seats>
                 {seats.map((s, i) =>
