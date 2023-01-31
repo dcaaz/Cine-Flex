@@ -1,10 +1,10 @@
 # Cineflex
 
-- Neste projeto, fiz uma Single-Page Application (SPA) de um cinema, usando React Router!
+- Primeira Single-Page Application (SPA) personalizada não poderia ser relacionada a outro tema, senão fimes!
 
 Experimente agora em: https://projeto10-cineflex-gray-five.vercel.app/
 
-## About
+## Sobre
 
 Esta é uma aplicação web com a qual muitas pessoas podem aproveitar seu momento de lazer, comprando seus ingressos para o cinema online. Abaixo estão as funcionalidades implementadas:
 
@@ -15,7 +15,7 @@ Esta é uma aplicação web com a qual muitas pessoas podem aproveitar seu momen
 - Tela de confirmação 
 - Retorno para home
 
-Ao usar esse aplicativo, durante todo o percuso, o usuário poderá relembrar através do rodapé as informações do filme selecionado. 
+Ao usar o aplicativo, durante todo o percuso, o usuário poderá relembrar através do rodapé as informações do filme selecionado. 
 
 ## Tecnologias 
 
