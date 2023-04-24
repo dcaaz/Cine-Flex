@@ -8,8 +8,8 @@ Experimente agora em: https://projeto10-cineflex-gray-five.vercel.app/
 
 Esta é uma aplicação web com a qual muitas pessoas podem aproveitar seu momento de lazer, comprando seus ingressos para o cinema online. Abaixo estão as funcionalidades implementadas:
 
-- Listar todos os filmes em cartaz
-- Listar sessões do filme selecionado
+- Tela de login
+- Tela de cadastro
 - Obter lista de assentos da sessão
 - Reservar assentos
 - Tela de confirmação 

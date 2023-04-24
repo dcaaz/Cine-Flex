@@ -41,7 +41,6 @@ export default function Inputs({ selectedSeats, selectedSeatsIds, movie, hour })
             })
     
             promise.catch((err) => {
-                console.log("err SeatsInput", err.response.data.mensagem);
                 alert(err.response.data.mensagem);
             })
         }
